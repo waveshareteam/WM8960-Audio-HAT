@@ -51,10 +51,14 @@ If you want to change the alsa settings, You can use `sudo alsactl --file=/etc/w
 #It will capture sound an playback on hw:1
 arecord -f cd -Dhw:1 | aplay -Dhw:1
 ```
+
+```bash
 #capture sound 
 #arecord -d 10 -r 16000 -c 1 -t wav -f S16_LE test.wav
 arecord -D hw:1,0 -f S32_LE -r 16000 -c 2 test.wav
+```
 
+```bash
 #play sound file test.wav
 aplay -D hw:1,0 test.wav
 ```
@@ -62,7 +66,7 @@ aplay -D hw:1,0 test.wav
 ### uninstall wm8960-soundcard
 If you want to upgrade the driver , you need uninstall the driver first.
 
-```
+```bash
 pi@raspberrypi:~/WM8960-Audio-HAT $ sudo ./uninstall.sh 
 ...
 
