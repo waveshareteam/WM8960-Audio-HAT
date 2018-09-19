@@ -22,6 +22,9 @@ apt update
 apt-get -y install raspberrypi-kernel-headers raspberrypi-kernel 
 apt-get -y install  dkms git i2c-tools libasound2-plugins
 
+# locate currently installed kernels (may be different to running kernel if
+# it's just been updated)
+kernels=$(ls /lib/modules | sed "s/^/-k /")
 uname_r=$(uname -r)
 
 function install_module {
@@ -39,7 +42,7 @@ function install_module {
   mkdir -p /usr/src/$mod-$ver
   cp -a $src/* /usr/src/$mod-$ver/
   dkms add -m $mod -v $ver
-  dkms build -m $mod -v $ver && dkms install --force -m $mod -v $ver
+  dkms build $kernels -m $mod -v $ver && dkms install --force $kernels -m $mod -v $ver
 
   mkdir -p /var/lib/dkms/$mod/$ver/$marker
 }
