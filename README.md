@@ -4,7 +4,7 @@ The drivers of [WM8960 Audio HAT] for Raspberry Pi.
 
 http://www.waveshare.net/shop/WM8960-Audio-HAT.htm
 
-http://www.waveshare.com/shop/wm8960-audio-hat.htm
+http://www.waveshare.com/wm8960-audio-hat.htm
 
 ### Install wm8960-soundcard
 Get the wm8960 soundcard source code. and install all linux kernel drivers
