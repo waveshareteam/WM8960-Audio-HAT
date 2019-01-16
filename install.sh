@@ -54,6 +54,8 @@ cp wm8960-soundcard.dtbo /boot/overlays
 
 
 #set kernel moduels
+grep -q "i2c-dev" /etc/modules || \
+  echo "i2c-dev" >> /etc/modules  
 grep -q "snd-soc-wm8960" /etc/modules || \
   echo "snd-soc-wm8960" >> /etc/modules  
 grep -q "snd-soc-wm8960-soundcard" /etc/modules || \
