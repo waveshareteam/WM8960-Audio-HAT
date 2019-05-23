@@ -15,6 +15,7 @@ uname_r=$(uname -r)
 
 echo "remove dtbos"
 rm  /boot/overlays/wm8960-soundcard.dtbo || true
+sed -i '/dtoverlay=wm8960-soundcard/d' /boot/config.txt
 
 echo "remove alsa configs"
 rm -rf  /etc/wm8960-soundcard/ || true

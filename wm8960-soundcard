@@ -8,16 +8,18 @@ modprobe i2c-dev
 
 sleep 1
 
-is_1a=$(i2cdetect -y  1 0x1a 0x1a | grep 1a | awk '{print $2}')
+is_1a=$(i2cdetect -y  1 0x1a 0x1a | egrep "(1a|UU)" | awk '{print $2}')
 
-rm /etc/asound.conf
-rm /var/lib/alsa/asound.state
+
 
 if [ "x${is_1a}" == "x1a" ] ; then
     echo "install wm8960-soundcard"
     dtoverlay wm8960-soundcard
     sleep 1
-
+    
+    rm /etc/asound.conf
+    rm /var/lib/alsa/asound.state
+    
     echo "create wm8960-soundcard configure file"
     ln -s /etc/wm8960-soundcard/asound.conf /etc/asound.conf
     
