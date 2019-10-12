@@ -42,7 +42,7 @@ function install_module {
   mkdir -p /usr/src/$mod-$ver
   cp -a $src/* /usr/src/$mod-$ver/
   dkms add -m $mod -v $ver
-  dkms build $kernels -m $mod -v $ver && dkms install --force $kernels -m $mod -v $ver
+  dkms build $uname_r -m $mod -v $ver && dkms install --force $uname_r -m $mod -v $ver
 
   mkdir -p /var/lib/dkms/$mod/$ver/$marker
 }
