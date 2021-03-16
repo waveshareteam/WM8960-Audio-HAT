@@ -69,8 +69,8 @@ grep -q "dtoverlay=i2s-mmap" /boot/config.txt || \
 grep -q "dtparam=i2s=on" /boot/config.txt || \
   echo "dtparam=i2s=on" >> /boot/config.txt
 
-grep -q "dtoverlay=wm8960-soundcard" /boot/config.txt || \
-  echo "dtoverlay=wm8960-soundcard" >> /boot/config.txt
+#grep -q "dtoverlay=wm8960-soundcard" /boot/config.txt || \
+#  echo "dtoverlay=wm8960-soundcard" >> /boot/config.txt
   
 #install config files
 mkdir /etc/wm8960-soundcard || true
