@@ -30,3 +30,4 @@ do
 done
 
 alsactl restore
+exit 0
