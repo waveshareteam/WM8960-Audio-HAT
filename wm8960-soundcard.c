@@ -38,7 +38,8 @@ struct simple_util_card_info {
 #endif
 
 /* Define dai_link_set_capabilities if not available in the kernel */
-#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 13, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 13, 0) || \
+	LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
 static inline void snd_soc_dai_link_set_capabilities(struct snd_soc_dai_link *link)
 {
     /* Empty implementation for older kernels */
@@ -50,6 +51,29 @@ static const struct snd_soc_ops simple_ops = {
 	.shutdown	= simple_util_shutdown,
 	.hw_params	= simple_util_hw_params,
 };
+
+static inline int wm8960_simple_set_dailink_name(struct simple_util_priv *priv,
+						 struct device *dev,
+						 struct snd_soc_dai_link *dai_link,
+						 char *name)
+{
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
+	return simple_util_set_dailink_name(priv, dai_link, name);
+#else
+	return simple_util_set_dailink_name(dev, dai_link, name);
+#endif
+}
+
+static inline int wm8960_simple_parse_card_name(struct simple_util_priv *priv,
+					       struct snd_soc_card *card,
+					       char *prefix)
+{
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 18, 0)
+	return simple_util_parse_card_name(priv, prefix);
+#else
+	return simple_util_parse_card_name(card, prefix);
+#endif
+}
 
 static int simple_util_parse_platform(struct device_node *node,
 				      struct snd_soc_dai_link_component *dlc)
@@ -214,7 +238,7 @@ static int simple_link_init(struct simple_util_priv *priv,
 	dai_link->init			= simple_util_dai_init;
 	dai_link->ops			= &simple_ops;
 
-	return simple_util_set_dailink_name(dev, dai_link, name);
+	return wm8960_simple_set_dailink_name(priv, dev, dai_link, name);
 }
 
 static int simple_dai_link_of_dpcm(struct simple_util_priv *priv,
@@ -512,7 +536,7 @@ static int simple_parse_of(struct simple_util_priv *priv, struct link_info *li)
 	if (ret < 0)
 		return ret;
 
-	ret = simple_util_parse_card_name(card, PREFIX);
+	ret = wm8960_simple_parse_card_name(priv, card, PREFIX);
 	if (ret < 0)
 		return ret;
 

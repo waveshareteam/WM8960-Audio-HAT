@@ -25,6 +25,14 @@
 
 #include "wm8960.h"
 
+#ifndef SND_SOC_DAIFMT_CBM_CFM
+#define SND_SOC_DAIFMT_CBM_CFM SND_SOC_DAIFMT_CBP_CFP
+#endif
+
+#ifndef SND_SOC_DAIFMT_CBS_CFS
+#define SND_SOC_DAIFMT_CBS_CFS SND_SOC_DAIFMT_CBC_CFC
+#endif
+
 /* R25 - Power 1 */
 #define WM8960_VMID_MASK 0x180
 #define WM8960_VREF      0x40
