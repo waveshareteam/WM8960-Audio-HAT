@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^Test-NetConnection -ComputerName 192\\.168\\.9\\.182 -Port 22 -InformationLevel Quiet -WarningAction SilentlyContinue$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
