@@ -19,7 +19,9 @@ ver="1.0"
 marker="0.0.0"
 
 apt update
-apt-get -y install raspberrypi-kernel-headers #raspberrypi-kernel 
+# "raspberrypi-kernel-headers" is gone on recent Raspberry Pi OS releases,
+# install the headers matching the running kernel instead
+apt-get -y install linux-headers-$(uname -r) || apt-get -y install raspberrypi-kernel-headers
 apt-get -y install  dkms git i2c-tools libasound2-plugins
 
 # locate currently installed kernels (may be different to running kernel if

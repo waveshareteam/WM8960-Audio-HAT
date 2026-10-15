@@ -34,6 +34,8 @@
 				#sound-dai-cells = <0>;
 				AVDD-supply = <&vdd_5v0_reg>;
 				DVDD-supply = <&vdd_3v3_reg>;
+				clocks = <&wm8960_mclk>;
+				clock-names = "mclk";
 			};
 		};
     };
@@ -70,9 +72,6 @@
                 };
                 dailink0_slave: simple-audio-card,codec {
                     sound-dai = <&wm8960>;
-			clocks = <&wm8960_mclk>;
-			clock-names = "mclk";
-
                 };
         };
     };
